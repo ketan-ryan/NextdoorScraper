@@ -29,3 +29,7 @@ def navigate():
     driver.get('https://nextdoor.com/for_sale_and_free/?init_source=more_menu')
 
     time.sleep(5)
+
+
+if __name__ == '__main__':
+    navigate()
