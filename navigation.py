@@ -4,19 +4,18 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
 
-def navigate():
-    with open('secrets.txt') as file:
-        username = file.readline()
-        password = file.readline()
-
-    driver = webdriver.Edge(executable_path='G:\Program Files\msedgedriver.exe')
+# Log into the site and go to the correct page
+def navigate(email, password):
+    # We need the driver for selenium to work
+    driver = webdriver.Edge(executable_path='D:\WebTest\msedgedriver.exe')
 
     driver.get('https://nextdoor.com/login/')
 
     time.sleep(2)
 
+    # Login
     email_field = driver.find_element_by_id('id_email')
-    email_field.send_keys(str(username))
+    email_field.send_keys(str(email))
 
     time.sleep(2)
 
@@ -24,12 +23,9 @@ def navigate():
     password_field.send_keys(str(password))
     password_field.send_keys(Keys.ENTER)
 
-    time.sleep(2)
+    time.sleep(3)
 
-    driver.get('https://nextdoor.com/for_sale_and_free/?init_source=more_menu')
+    # Navigate to 'finds' section
+    driver.get('https://nextdoor.com/for_sale_and_free/?init_source=more_menu&is_free=true')
 
-    time.sleep(5)
-
-
-if __name__ == '__main__':
-    navigate()
+    return driver
