@@ -1,9 +1,14 @@
 import bs4
-from navigation import navigate
 import time
 
 # Create list of items we might be interested in
 matches = ['exercise', 'equipment', 'dumbbell', 'wood', 'cat']
+
+
+def load_terms(terms=matches):
+    global matches
+    if terms != ['']:
+        matches = terms
 
 
 # Finds any postings that match what we want

@@ -3,6 +3,7 @@ import getpass
 import random
 import time
 import re
+import os
 
 import db_manager
 import navigation
@@ -24,7 +25,9 @@ logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.WARN, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                     datefmt='%m/%d/%Y %H:%M:%S')
 
-email, password = None, None
+email, password, carr = '', '', ''
+
+
 # Make sure input read in from secrets.txt is valid
 def validate_input(param, mode):
     if mode == 0:  # Check phone number
@@ -96,8 +99,7 @@ if not use_secret:
             carr = input('What phone provider do you have? Enter "help" to see a list of valid carriers: ')
         else:
             break
-    valid_lower = [x.lower() for x in valid]
-    domain = domains[valid_lower.index(carr)]
+
 
     # Email
     email = input('Please enter the email you use to log into Nextdoor: ')
@@ -117,7 +119,7 @@ else:
     try:
         with open('secrets.txt', 'r') as secrets:
             num = secrets.readline()
-            carr = secrets.readline()
+            carr = secrets.readline().strip()
             email = secrets.readline()
             password = secrets.readline()
             validate_input(num, 0)
@@ -127,14 +129,39 @@ else:
         logging.fatal('There was an error opening secrets.txt. Make sure it is placed in the root directory.')
         exit(1)
 
+valid_lower = [x.lower() for x in valid]
+domain = domains[valid_lower.index(carr)]
+driver_path = input('Please enter the path to your web driver: ')
+
+while True:
+    if not os.path.isfile(driver_path) and len(driver_path) != 0:
+        print('Please enter a valid path.')
+        driver_path = input('Please enter the path to your web driver: ')
+    else:
+        break
+
+search_terms = input('[Optional] What terms would you like to be notified of? Enter values separated by a comma: ')
+search_terms = search_terms.split(',')
+
+if len(search_terms) == 0:
+    scraper.load_terms()
+else:
+    scraper.load_terms(search_terms)
+
 driver = None
-try:
+if len(driver_path) == 0:
     driver = navigation.navigate(email, password)
-except NameError as ex:
-    logger.fatal('Invalid email or password.')
-    exit(1)
+else:
+    try:
+        driver = navigation.navigate(email, password, driver_path)
+
+    except NameError as ex:
+        logger.fatal('Invalid email or password.')
+        exit(1)
 
 scraper.scroll(driver)
+db_manager.init_sms(num, domain, email)
+
 while True:
     links, titles = scraper.scrape(driver)
     db_manager.load(links, titles)

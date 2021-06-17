@@ -5,9 +5,9 @@ from selenium.webdriver.common.keys import Keys
 
 
 # Log into the site and go to the correct page
-def navigate(email, password):
+def navigate(email, password, path="G:\Program Files\msedgedriver.exe"):
     # We need the driver for selenium to work
-    driver = webdriver.Edge(executable_path='D:\WebTest\msedgedriver.exe')
+    driver = webdriver.Edge(executable_path=path)
 
     driver.get('https://nextdoor.com/login/')
 
