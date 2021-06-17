@@ -25,7 +25,7 @@ logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.WARN, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                     datefmt='%m/%d/%Y %H:%M:%S')
 
-email, password, carr = '', '', ''
+email, password, carr, num = '', '', '', 0
 
 
 # Make sure input read in from secrets.txt is valid
@@ -99,7 +99,6 @@ if not use_secret:
             carr = input('What phone provider do you have? Enter "help" to see a list of valid carriers: ')
         else:
             break
-
 
     # Email
     email = input('Please enter the email you use to log into Nextdoor: ')
