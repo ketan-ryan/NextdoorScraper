@@ -25,10 +25,10 @@ Your entries must be formatted in a certain way. You can view how it should look
   * ['Alltell', 'ATT', 'Boost', 'Cricket', 'Firstnet', 'GoogleFi', 'MetroPCS', 'Republic', 'Sprint', 'TMobile',
          'USCellular', 'Verizon', 'Virgin']
 
-<br/>You will then be prompted on what search terms you want to be notified about. These are what the program will actually look for - so if you were looking for cameras and printers, you'd input: 'camera, printer' as a comma separated list.
+<br/>You will then be prompted on what search terms you want to be notified about. These are what the program will actually look for - so if you were looking for cameras and printers, you'd input: 'camera, printer' as a comma separated list. If you do not enter anything, a default list of ['exercise', 'equipment', 'dumbbell', 'wood'] will be used.
 
  You will also need to provide an __**Absolute**__ path to where your database will be stored. You don't actually need to have a database already in existance, but you must provide the full path, even
- if the database will be located in your folder. Ex: C:\Users\John\Desktop\NextDoorScraper\db.json
+ if the database will be located in your folder. Ex: <span style="color:blue">C:\Users\John\Desktop\NextDoorScraper\db.json</span>
 <br/>The database file must end with .json. 
 
 <br/>That should be all you need! If you have any issues or suggestion, create a new issue in the project's issue tracker. Feel free to fork the project and adapt it to any other websites.
