@@ -156,6 +156,8 @@ domain = domains[valid_lower.index(carr)]
 driver_path = input('Please enter the path to your web driver: ')
 
 while True:
+    if len(driver_path.strip()) == 0:
+        break
     if not os.path.isfile(driver_path.strip()) or driver_path.strip()[-4:] != '.exe':
         print('Please enter a valid path.')
         driver_path = input('Please enter the path to your web driver: ')
