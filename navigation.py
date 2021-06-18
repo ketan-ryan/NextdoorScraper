@@ -11,7 +11,7 @@ logging.basicConfig(level=logging.WARN, format='%(asctime)s - %(levelname)s - %(
                     datefmt='%m/%d/%Y %H:%M:%S')
 
 
-def navigate(email, password, path):
+def navigate(email, password, path='msedgedriver.exe'):
     # We need the driver for selenium to work
     driver = None
 
