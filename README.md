@@ -21,7 +21,7 @@ You may get some output in your console that looks like errors. If it is not col
 Your entries must be formatted in a certain way. You can view how it should look like by typing 'help' when prompted, but they will also be here for reference.
 * Phone number: You must enter a 10 digit phone number without any spaces or hyphens. For example, if your phone number was (999)-444-5555, you'd enter it as 9994445555.
 * Email: You must enter a valid email (john@business.com)
-* Cell domain: You must enter your cell domain in the correct format. Examples are listed below: 
+* Cell domain: You must enter your cell domain in the correct format. Valid domains are listed below: 
   * ['Alltell', 'ATT', 'Boost', 'Cricket', 'Firstnet', 'GoogleFi', 'MetroPCS', 'Republic', 'Sprint', 'TMobile',
          'USCellular', 'Verizon', 'Virgin']
 
