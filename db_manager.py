@@ -6,9 +6,13 @@ from urllib.parse import unquote
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
+os.system('color')
+# yellow, bright yellow, reset, red, green, bold, blue
+y, yb, r, d, g, b, bl = '\u001b[33m', '\u001b[33;1m', '\u001b[0m', '\u001b[31m', '\u001b[32m', '\u001b[1m', '\u001b[34m'
+
 # Setup logger - might need to remove if it gets annoying
 logger = logging.getLogger(__name__)
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+logging.basicConfig(level=logging.INFO, format=f'\u001b[37;1m{b}%(asctime)s - %(name)s - %(levelname)s - %(message)s{r}',
                     datefmt='%m/%d/%Y %H:%M:%S')
 number, domain, email = 0, '', ''
 
@@ -25,9 +29,7 @@ def init_sms(num, dom, e):
 def send_message(body):
     server = smtplib.SMTP_SSL("smtp.gmail.com", port=465)
 
-    with open('secrets.txt', 'r') as file:
-        for i in range(4):
-            _ = file.readline()
+    with open('token.txt', 'r') as file:
         pw = file.readline()
 
     server.login(email, pw)
@@ -42,6 +44,7 @@ def send_message(body):
     sms = msg.as_string()
     server.sendmail(email, dom, sms)
     server.quit()
+    logger.info(f'{g}Message delivery successful.{r}')
 
 
 # Loads the database file and checks to see if item already exists
@@ -51,7 +54,6 @@ def load(links, titles):
         empty = {}
         with open('db.json', 'w') as file:
             json.dump(empty, file, indent=4)
-            print('bro')
 
     with open('db.json', 'r') as file:
         data = json.load(file)
@@ -67,10 +69,14 @@ def load(links, titles):
                 body.append(f"{str(titles[idx])} https://nextdoor.com{str(unquote(links[idx]))}\n")
                 flag = True
             else:
-                logger.info(f'Item with key "{links[idx]}" already exists')
+                logger.info(f'{y}Item with value "{titles[idx]}" already exists{r}')
 
         # Turn list of items into string
         body = ''.join(body)
         json.dump(data, file, indent=4)
         if flag:
-            send_message(body)
+            logger.info(f'{g}Database updated successfully.{r}')
+            try:
+                send_message(body)
+            except TimeoutError:
+                logger.warning(f'{y}There was an error sending the NextDoor notification. Please try again later.{r}')

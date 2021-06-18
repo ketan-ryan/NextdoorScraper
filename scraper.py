@@ -2,7 +2,7 @@ import bs4
 import time
 
 # Create list of items we might be interested in
-matches = ['exercise', 'equipment', 'dumbbell', 'wood', 'cat']
+matches = ['exercise', 'equipment', 'dumbbell', 'wood']
 
 
 def load_terms(terms=matches):
