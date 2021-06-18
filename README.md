@@ -6,7 +6,7 @@ You may get some output in your console that looks like errors. If it is not col
 1. You should already have a main.zip file. I recommend unzipping it in a folder dedicated to the scraper, such as C:\Users\John\Desktop\NextDoorScraper\
    * When unzipped, the main.exe file will be found in the main.dist folder. That exe is the one that you will be running.
 
-2. Install Microsoft Edge Driver, and save the executable in the same folder as main.exe. You can get that driver here: https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/
+2. Install Microsoft Edge Driver, and save the executable (msedgedriver.exe) in the same folder as main.exe. You can get that driver here: https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/
    * Currently, it is recommended to get the stable release (Version: 91.0.864.53) for x64 if you are on Windows, but if you have an issue with the version just download the right one for you.
    * You will need Microsoft Edge for this program to work.
 
