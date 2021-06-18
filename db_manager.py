@@ -48,18 +48,18 @@ def send_message(body):
 
 
 # Loads the database file and checks to see if item already exists
-def load(links, titles):
+def load(links, titles, path):
     # Open the file for reading and load the data into a dict
-    if not os.path.isfile('db.json') or os.stat('db.json').st_size == 0:
+    if not os.path.isfile(path) or os.stat(path).st_size == 0:
         empty = {}
-        with open('db.json', 'w') as file:
+        with open(path, 'w') as file:
             json.dump(empty, file, indent=4)
 
-    with open('db.json', 'r') as file:
+    with open(path, 'r') as file:
         data = json.load(file)
 
     # Open the file for writing and log any new entries
-    with open('db.json', 'w') as file:
+    with open(path, 'w') as file:
         body = []
         flag = False
         for idx, _ in enumerate(links):

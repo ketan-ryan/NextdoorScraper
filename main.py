@@ -76,6 +76,7 @@ while True:
         print(f'{y}Invalid input.{r}')
         flag = input('Use secrets file? (Y/N/help) ')
 
+valid_lower = [x.lower() for x in valid]
 # User is not using a secrets file - get input from command line, make sure it is valid
 if not use_secret:
     # Phone number
@@ -94,7 +95,7 @@ if not use_secret:
 
     # Phone carrier
     while True:
-        if not any(carrier.lower() in carr.lower() for carrier in valid) and carr != 'help':
+        if not carr.lower() in valid_lower and carr != 'help':
             print(f'{y}Please enter a valid carrier.{r}')
             carr = input('What phone provider do you have? Enter "help" to see a list of valid carriers: ')
         elif carr == 'help':
@@ -151,7 +152,6 @@ else:
         traceback.print_exc()
         exit(1)
 
-valid_lower = [x.lower() for x in valid]
 domain = domains[valid_lower.index(carr)]
 driver_path = input('Please enter the path to your web driver: ')
 
@@ -202,7 +202,7 @@ db_manager.init_sms(num, domain, email)
 
 while True:
     links, titles = scraper.scrape(driver)
-    db_manager.load(links, titles)
+    db_manager.load(links, titles, db_path)
     time.sleep(random.randrange(180, 300))
     driver.refresh()
     logger.debug('Page refreshed')
