@@ -36,4 +36,4 @@ Your entries must be formatted in a certain way. You can view how it should look
 <br/>That should be all you need! If you have any issues or suggestion, create a new issue in the project's issue tracker. Feel free to fork the project and adapt it to any other websites.
 
 ## Known Issues
-* The program will not send you a text message if you have AT&T as your carrier. This is an ATT issue, not a me issue. The database will, however, stil be populated and the console updated.
+* The program will not send you a text message if you have AT&T as your carrier. This is an AT&T issue, not an issue with the code - AT&T apparently does not like to receive email based SMS. The database will, however, stil be populated and the console updated.
