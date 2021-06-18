@@ -10,6 +10,13 @@ Install Microsoft Edge Driver, and save the executable in the same folder as mai
 <br/>
 Double click main.exe to run the program. You will need to enter your phone number, cell carrier, nextdoor email, and nextdoor password. To avoid from having to retype this every time you run the program, you can put them in a file called secrets.txt, preferably in the same folder as everything else.
 
+Your secrets.txt file should have one entry per line, in the following order:
+* Phone number (see formatting below)
+* Phone carrier (see formatting below)
+* Email (see formatting below)
+* Password
+The email and password are what you use to log into https://nextdoor.com
+
 ### Formatting
 Your entries must be formatted in a certain way. You can view how it should look like by typing 'help' when prompted, but they will also be here for reference.
 * Phone number: You must enter a 10 digit phone number without any spaces or hypens. For example, if your phone number was (999)-444-5555, you'd enter it as 9994445555.
@@ -17,8 +24,10 @@ Your entries must be formatted in a certain way. You can view how it should look
 * Cell domain: You must enter your cell domain in the correct format. Examples are listed below: 
   * ['Alltell', 'ATT', 'Boost', 'Cricket', 'Firstnet', 'GoogleFi', 'MetroPCS', 'Republic', 'Sprint', 'TMobile',
          'USCellular', 'Verizon', 'Virgin']
-         
- You will also need to provide a path to where your database will be stored. You don't actually need to have a database already in existance, but you must provide the full path, even
+
+<br/>You will then be prompted on what search terms you want to be notified about. These are what the program will actually look for - so if you were looking for cameras and printers, you'd input: 'camera, printer' as a comma separated list.
+
+ You will also need to provide an **Absolute** path to where your database will be stored. You don't actually need to have a database already in existance, but you must provide the full path, even
  if the database will be located in your folder. Ex: C:\Users\John\Desktop\NextDoorScraper\db.json
 <br/>The database file must end with .json. 
 
