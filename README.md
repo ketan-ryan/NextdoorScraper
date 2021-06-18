@@ -1,5 +1,8 @@
 # NextdoorScraper
-## Installation Instructions
+## Note!
+You may get some output in your console that looks like errors. If it is not color formatted, does not cause the program to crash, and does not say 'log', it doesn't matter.
+
+## Installation Instructions (READ CAREFULLY)
 You should already have a main.zip file. I recommend unzipping it in a folder dedicated to the scraper, such as C:\Users\John\Desktop\NextDoorScraper\
 <br/>When unzipped, the main.exe file will be found in the main.dist folder. That exe is the one that you will be running.
 
