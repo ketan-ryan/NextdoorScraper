@@ -37,8 +37,7 @@ def scrape(driver):
 def scroll(driver, scroll_height=5):
     # Scroll a bit to load more items
     last_height = driver.execute_script('return document.body.scrollHeight')
-    i = scroll_height
-    while i >= 0:
+    for i in range(scroll_height):
         driver.execute_script('window.scrollTo(0, document.body.scrollHeight);')
         time.sleep(2)  # Allow the page to load
         new_height = driver.execute_script('return document.body.scrollHeight')
@@ -46,5 +45,3 @@ def scroll(driver, scroll_height=5):
         if new_height == last_height:
             break
         last_height = new_height
-
-        i -= 1
