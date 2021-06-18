@@ -12,7 +12,11 @@ logging.basicConfig(level=logging.WARN, format='%(asctime)s - %(levelname)s - %(
 
 
 # Log into the site and go to the correct page
+<<<<<<< HEAD
 def navigate(email, password, path):
+=======
+def navigate(email, password, path=r"G:\Program Files\msedgedriver.exe"):
+>>>>>>> 474a6030581964602907fbfa8ac242bfd0cf4844
     # We need the driver for selenium to work
     driver = None
 
