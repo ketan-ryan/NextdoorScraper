@@ -25,10 +25,14 @@ Your entries must be formatted in a certain way. You can view how it should look
   * ['Alltell', 'ATT', 'Boost', 'Cricket', 'Firstnet', 'GoogleFi', 'MetroPCS', 'Republic', 'Sprint', 'TMobile',
          'USCellular', 'Verizon', 'Virgin']
 
-<br/>5. You will then be prompted on what search terms you want to be notified about. These are what the program will actually look for - so if you were looking for cameras and printers, you'd input: 'camera, printer' as a comma separated list. 
+<br/>5. The next step is to enter the path to where your webdriver is stored. If left blank, it will be assumed the webdriver is in the same folder as main.exe.
+  * An example path might be 'C:\Program Files\msedgedriver.exe'
+  * You can also just enter 'msedgedriver.exe', or leave the field blank and hit enter, if the driver is in the same folder as main.exe.
+
+<br/>6. [Optional] You will then be prompted on what search terms you want to be notified about. These are what the program will actually look for - so if you were looking for cameras and printers, you'd input: 'camera, printer' as a comma separated list. 
   * If you do not enter anything, a default list of ['exercise', 'equipment', 'dumbbell', 'wood'] will be used.
 
-6. You will then need to provide a *_WINDOWS ABSOLUTE_* path to where your database will be stored. You don't actually need to have a database already in existance, but you must provide the full path, even
+<br/>7. You will then need to provide a *_WINDOWS ABSOLUTE_* path to where your database will be stored. You don't actually need to have a database already in existance, but you must provide the full path, even
  if the database will be located in your folder. 
    * Ex: <span style="color:blue">C:\Users\John\Desktop\NextDoorScraper\db.json</span>
 <br/>The database file must end with .json. 
