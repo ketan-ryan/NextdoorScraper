@@ -1,17 +1,15 @@
 from sys import exit
-import logging
 import time
+import arg_handler
 
 import selenium.common.exceptions
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
-logger = logging.getLogger(__name__)
-logging.basicConfig(level=logging.WARN, format='%(asctime)s - %(levelname)s - %(message)s',
-                    datefmt='%m/%d/%Y %H:%M:%S')
+logger = arg_handler.get_logger()
 
 
-def navigate(email, password, path):
+def navigate(email, password, path='msedgedriver.exe'):
     # We need the driver for selenium to work
     driver = None
 

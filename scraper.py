@@ -1,14 +1,18 @@
 import bs4
+import arg_handler
 import time
 
 # Create list of items we might be interested in
-matches = ['exercise', 'equipment', 'dumbbell', 'wood']
+matches = []
+logger = arg_handler.get_logger()
 
 
-def load_terms(terms=matches):
+def load_terms(terms=None):
+    if not terms:
+        terms = ['exercise', 'equipment', 'dumbbell', 'wood']
+    logger.debug(f'Matches: {terms}')
     global matches
-    if terms != ['']:
-        matches = terms
+    matches = terms
 
 
 # Finds any postings that match what we want
@@ -29,7 +33,8 @@ def scrape(driver):
         if any(x in str(title).lower() for x in matches):
             titles.append(title)
             links.append(link.get('href'))
-
+    logger.debug(f'Links: {links}')
+    logger.debug(f'Titles: {titles}')
     return links, titles
 
 

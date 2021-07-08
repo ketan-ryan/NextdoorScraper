@@ -1,10 +1,11 @@
-import json
-import logging
-import os
-import smtplib
-from urllib.parse import unquote
-from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from urllib.parse import unquote
+import smtplib
+import logging
+import json
+import arg_handler
+import os
 
 os.system('color')
 # yellow, bright yellow, reset, red, green, bold, blue
@@ -12,7 +13,7 @@ y, yb, r, d, g, b, bl = '\u001b[33m', '\u001b[33;1m', '\u001b[0m', '\u001b[31m',
 
 # Setup logger - might need to remove if it gets annoying
 logger = logging.getLogger(__name__)
-logging.basicConfig(level=logging.INFO, format=f'\u001b[37;1m{b}%(asctime)s - %(name)s - %(levelname)s - %(message)s{r}',
+logging.basicConfig(level=logging.DEBUG if arg_handler.is_debug() else logging.INFO, format=f'\u001b[37;1m{b}%(asctime)s - %(name)s - %(levelname)s - %(message)s{r}',
                     datefmt='%m/%d/%Y %H:%M:%S')
 number, domain, email = 0, '', ''
 
@@ -28,19 +29,21 @@ def init_sms(num, dom, e):
 # Send sms message
 def send_message(body):
     server = smtplib.SMTP_SSL("smtp.gmail.com", port=465)
-
+    logger.debug('SMTP connection established')
     with open('token.txt', 'r') as file:
         pw = file.readline()
 
     server.login(email, pw)
+    logger.debug('Logged in')
     dom = f'1{str(number).strip()}@{domain.strip()}'
+    logger.debug(dom)
     msg = MIMEMultipart()
     msg["From"] = email
     msg["To"] = dom.strip()
     msg["Subject"] = 'New nextdoor notification!'
 
-    mime_image = MIMEText(body)
-    msg.attach(mime_image)
+    mime_text = MIMEText(body)
+    msg.attach(mime_text)
     sms = msg.as_string()
     server.sendmail(email, dom, sms)
     server.quit()
@@ -51,6 +54,7 @@ def send_message(body):
 def load(links, titles, path):
     # Open the file for reading and load the data into a dict
     if not os.path.isfile(path) or os.stat(path).st_size == 0:
+        logger.debug(f'Writing new file {path}')
         empty = {}
         with open(path, 'w') as file:
             json.dump(empty, file, indent=4)
@@ -60,6 +64,7 @@ def load(links, titles, path):
 
     # Open the file for writing and log any new entries
     with open(path, 'w') as file:
+        logger.debug(f'Opened {path} for writing')
         body = []
         flag = False
         for idx, _ in enumerate(links):
@@ -67,6 +72,7 @@ def load(links, titles, path):
             if not links[idx] in data:
                 data[links[idx]] = str(titles[idx])
                 body.append(f"{str(titles[idx])} https://nextdoor.com{str(unquote(links[idx]))}\n")
+                logger.debug(f'Added {titles[idx]} to database file')
                 flag = True
             else:
                 logger.info(f'{y}Item with value "{titles[idx]}" already exists{r}')
