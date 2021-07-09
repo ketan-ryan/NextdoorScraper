@@ -28,7 +28,7 @@ else:
     logging.basicConfig(level=logging.WARN,
                         format=f'{d}%(asctime)s - %(name)s - %(levelname)s - %(message)s{r}',
                         datefmt='%m/%d/%Y %H:%M:%S')
-    logger = logging.getLogger(__name__)
+logger = logging.getLogger(__name__)
 
 
 def get_logger() -> logging.getLoggerClass():
