@@ -8,7 +8,7 @@ logger = arg_handler.get_logger()
 
 
 def load_terms(terms=None):
-    if not terms:
+    if terms is None:
         terms = ['exercise', 'equipment', 'dumbbell', 'wood']
     logger.debug(f'Matches: {terms}')
     global matches

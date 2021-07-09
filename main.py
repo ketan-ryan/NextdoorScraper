@@ -36,7 +36,7 @@ domains = ['sms.alltelwireless.com', 'txt.att.net', 'sms.myboostmobile.com', 'mm
 
 logger = arg_handler.get_logger()
 try:
-    email, password, carr, num = '', '', '', 0
+    secrets_file, email, password, carr, num = '', '', '', '', 0
 
 
     def validate_input(param, mode):  # Make sure input read in from secrets.txt is valid
@@ -193,11 +193,10 @@ try:
 
     search_terms = input(
         '[Optional] What terms would you like to be notified of? Enter values separated by a comma: ')
-    search_terms = search_terms.split(',')
+    # search_terms = search_terms.split(',')
     logger.debug(f'Search terms were: {search_terms}')
     if len(search_terms) == 0:
         scraper.load_terms()
-        logger.debug('Using default search terms')
     else:
         scraper.load_terms(search_terms)
 
@@ -237,7 +236,7 @@ try:
 
     logger.debug('Scrolling...')
     scraper.scroll(driver)
-    db_manager.init_sms(num, domain, email)
+    db_manager.init_sms(num, domain)
 
     while True:
         links, titles = scraper.scrape(driver)

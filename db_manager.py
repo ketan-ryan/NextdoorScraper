@@ -15,15 +15,14 @@ y, yb, r, d, g, b, bl = '\u001b[33m', '\u001b[33;1m', '\u001b[0m', '\u001b[31m',
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.DEBUG if arg_handler.is_debug() else logging.INFO, format=f'\u001b[37;1m{b}%(asctime)s - %(name)s - %(levelname)s - %(message)s{r}',
                     datefmt='%m/%d/%Y %H:%M:%S')
-number, domain, email = 0, '', ''
+number, domain = 0, ''
 
 
 # Set up fields needed to send sms
-def init_sms(num, dom, e):
-    global number, domain, email
+def init_sms(num, dom):
+    global number, domain
     number = num
     domain = dom
-    email = e
 
 
 # Send sms message
@@ -31,6 +30,7 @@ def send_message(body):
     server = smtplib.SMTP_SSL("smtp.gmail.com", port=465)
     logger.debug('SMTP connection established')
     with open('token.txt', 'r') as file:
+        email = file.readline()
         pw = file.readline()
 
     server.login(email, pw)
