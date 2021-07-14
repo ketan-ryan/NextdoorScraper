@@ -236,7 +236,7 @@ try:
 
     logger.debug('Scrolling...')
     scraper.scroll(driver)
-    db_manager.init_sms(num, domain)
+    db_manager.init_sms(num, domain, (email if 'att' in domain else None))
 
     while True:
         links, titles = scraper.scrape(driver)
